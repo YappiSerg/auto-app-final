@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>АвтоПрокат — курсовая работа</title>
+  <script type="module" crossorigin src="./assets/index-e2biEmWs.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CKUuCole.css">
+</head>
+<body>
+	<header class="header">
+		<div class="container header-inner">
+			<a href="#" class="logo">АвтоПрокат</a>
+			<nav class="nav">
+				<button class="nav-btn active" data-view="catalog">Каталог</button>
+				<button class="nav-btn" data-view="bookings">
+					Мои брони
+					<span id="bookings-count" class="badge">0</span>
+				</button>
+			</nav>
+		</div>
+	</header>
+
+	<main class="container">
+		<section id="catalog-view" class="view active">
+			<div class="hero">
+				<h1>Аренда автомобилей</h1>
+				<p>Выберите марку и модель автомобиля, укажите даты и оформите бронь.</p>
+			</div>
+
+			<div class="filters">
+				<label>
+					Марка
+					<select id="brand-select"></select>
+				</label>
+
+				<label>
+					Поиск марки
+					<input id="brand-search-input" type="search" placeholder="Например, Toyota" />
+				</label>
+
+				<label>
+					Популярные марки
+					<select id="brand-popular-select">
+						<option value="all">Все марки</option>
+						<option value="popular">Только популярные</option>
+					</select>
+				</label>
+
+				<label>
+					Поиск модели
+					<input id="search-input" type="search" placeholder="Например, Camry" />
+				</label>
+
+				<label>
+					Сортировка
+					<select id="sort-select">
+						<option value="default">По умолчанию</option>
+						<option value="price-asc">Сначала дешевле</option>
+						<option value="price-desc">Сначала дороже</option>
+						<option value="name">По названию модели</option>
+					</select>
+				</label>
+			</div>
+
+			<div id="status" class="status"></div>
+			<div id="cars-grid" class="grid"></div>
+		</section>
+
+		<section id="bookings-view" class="view">
+			<h2>Мои бронирования</h2>
+			<div id="bookings-list" class="bookings-list"></div>
+		</section>
+	</main>
+
+	<div id="rent-modal" class="modal hidden">
+		<div class="modal-card">
+			<button id="close-modal" class="icon-btn" aria-label="Закрыть">×</button>
+
+			<h3 id="modal-car-title"></h3>
+			<p id="modal-car-info" class="muted"></p>
+
+			<form id="rent-form">
+				<label>
+					Имя
+					<input required name="customer" minlength="2" placeholder="Иван Иванов" />
+				</label>
+
+				<label>
+					Телефон
+					<input required type="tel" name="phone" pattern="[0-9+\(\) \-]{6,}" placeholder="+7 900 000-00-00" />
+				</label>
+
+				<div class="row">
+					<label>
+						Дата начала
+						<input required type="date" name="from" />
+					</label>
+
+					<label>
+						Дата возврата
+						<input required type="date" name="to" />
+					</label>
+				</div>
+
+				<label>
+					Комментарий
+					<textarea name="comment" rows="3" placeholder="Пожелания к аренде (необязательно)"></textarea>
+				</label>
+
+				<div class="summary">
+					<span>Цена за сутки:</span>
+					<strong id="modal-price">0 ₽</strong>
+
+					<span>Дней:</span>
+					<strong id="modal-days">0</strong>
+
+					<span>Итого:</span>
+					<strong id="modal-total">0 ₽</strong>
+				</div>
+
+				<button class="btn primary" type="submit">Забронировать</button>
+			</form>
+		</div>
+	</div>
+
+	<div id="toast" class="toast hidden"></div>
+</body>
+</html>
